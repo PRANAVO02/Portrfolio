@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Pranavo V A | Software Engineer | Portfolio</title>
+    <!-- Google Fonts + Poppins + Inter mix -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- AOS library for subtle scroll animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #eef2f9 0%, #e0e9f0 100%);
+            font-family: 'Inter', 'Space Grotesk', sans-serif;
+            color: #0a2540;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #cbdde9;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2c7f9e;
+            border-radius: 10px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* floating glass card */
+        .portfolio-card {
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(0px);
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0,0,0,0.05);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.6);
+        }
+
+        /* animated gradient header */
+        .header {
+            background: linear-gradient(110deg, #0F2E3F 0%, #1B4F6E 100%);
+            padding: 2.5rem 2.8rem 2rem 2.8rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: "⚡";
+            font-size: 220px;
+            opacity: 0.07;
+            position: absolute;
+            bottom: -40px;
+            right: -20px;
+            pointer-events: none;
+            font-family: monospace;
+        }
+        .name {
+            font-size: 3.2rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(125deg, #FFFFFF, #D9ECFA);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        .tagline {
+            font-size: 1rem;
+            font-weight: 400;
+            opacity: 0.85;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.3px;
+        }
+        .contact-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            row-gap: 0.7rem;
+            margin-top: 0.5rem;
+            background: rgba(255,255,255,0.12);
+            padding: 0.8rem 1.2rem;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+            width: fit-content;
+        }
+        .contact-bar a, .contact-bar span {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #f0f9ff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .contact-bar a:hover {
+            color: #ffd966;
+            transform: translateY(-2px);
+        }
+        .contact-bar i {
+            font-size: 1rem;
+            width: 1.2rem;
+        }
+
+        /* content */
+        .content {
+            padding: 2rem 2.5rem 2.8rem 2.5rem;
+        }
+
+        /* section titles with icons */
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.3rem;
+            color: #155f7c;
+            border-bottom: 3px solid #cbe4f0;
+            padding-bottom: 0.45rem;
+        }
+        .section-title i {
+            font-size: 1.5rem;
+            color: #287f9e;
+            background: #e4f0f7;
+            padding: 6px;
+            border-radius: 14px;
+        }
+
+        .profile-text {
+            background: #f5fbfe;
+            padding: 1.2rem 1.5rem;
+            border-radius: 24px;
+            color: #1a4d6b;
+            font-weight: 450;
+            border-left: 4px solid #2d9cdb;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            transition: all 0.2s;
+        }
+
+        /* skills chips */
+        .skills-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 0.5rem;
+        }
+        .skill-chip {
+            background: white;
+            border-radius: 40px;
+            padding: 0.45rem 1.1rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #1b5f7e;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+            border: 1px solid #d4e5ef;
+            transition: all 0.2s ease;
+            cursor: default;
+        }
+        .skill-chip:hover {
+            transform: translateY(-3px);
+            background: #eef6fc;
+            border-color: #98c1db;
+            box-shadow: 0 8px 14px -8px rgba(0,0,0,0.1);
+        }
+        .skill-chip strong {
+            color: #075c7c;
+        }
+
+        /* project cards modern */
+        .project-card {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            padding: 1.2rem 1.4rem;
+            margin-bottom: 1.6rem;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            border: 1px solid #e2edf5;
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.02);
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: #bee0f0;
+            box-shadow: 0 18px 30px -12px rgba(27, 79, 110, 0.2);
+        }
+        .project-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.5rem;
+        }
+        .project-name {
+            font-size: 1.25rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1C5C7C, #0E3B55);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .project-links a {
+            background: #eef3f9;
+            padding: 5px 12px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #1f6d93;
+            text-decoration: none;
+            margin-left: 0.6rem;
+            transition: 0.2s;
+        }
+        .project-links a:hover {
+            background: #d4e3ef;
+            color: #0c4f6e;
+        }
+        .project-tech {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #3a7e9e;
+            background: #eef4fa;
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            margin: 0.6rem 0 0.8rem 0;
+        }
+        .project-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .project-list li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            gap: 0.7rem;
+            font-size: 0.9rem;
+            color: #2b5777;
+        }
+        .project-list li i {
+            color: #29997c;
+            font-size: 0.7rem;
+            margin-top: 0.35rem;
+        }
+
+        /* education cards */
+        .edu-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin-top: 0.5rem;
+        }
+        .edu-card {
+            background: #f9fdfe;
+            border-radius: 1.2rem;
+            padding: 1rem 1.4rem;
+            flex: 1 1 200px;
+            border: 1px solid #deecf3;
+            transition: 0.2s;
+        }
+        .edu-card:hover {
+            background: white;
+            border-color: #c0d9e8;
+        }
+
+        /* certificate items */
+        .cert-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            background: #fafeff;
+            margin-bottom: 0.7rem;
+            padding: 0.7rem 1rem;
+            border-radius: 60px;
+            border: 1px solid #e2ecf2;
+        }
+        .cert-title i {
+            width: 1.8rem;
+            color: #2c7f9e;
+        }
+        .cert-date {
+            font-size: 0.75rem;
+            background: #eaf2f7;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+        }
+
+        /* interactive floating button */
+        .scroll-top {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #1b5f7e;
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: 0.3s;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 999;
+            border: none;
+            font-size: 1.2rem;
+        }
+        .scroll-top.show {
+            opacity: 1;
+        }
+        .scroll-top:hover {
+            background: #0a3f58;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 750px) {
+            .content {
+                padding: 1.5rem;
+            }
+            .header {
+                padding: 1.8rem;
+            }
+            .name {
+                font-size: 2.2rem;
+            }
+            .contact-bar {
+                flex-wrap: wrap;
+                width: 100%;
+                border-radius: 28px;
+            }
+            .section-title {
+                font-size: 1.4rem;
+            }
+        }
+        footer {
+            text-align: center;
+            font-size: 0.7rem;
+            padding-top: 1.2rem;
+            color: #698aa3;
+            border-top: 1px solid #dde6ef;
+            margin-top: 0.8rem;
+        }
+        .highlight {
+            background: linear-gradient(120deg, #f9f3e3 0%, #fef9ef 100%);
+        }
+        .glow-text {
+            transition: all 0.2s;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="portfolio-card" data-aos="fade-up" data-aos-duration="800">
+        <div class="header">
+            <div class="name">Pranavo V A</div>
+            <div class="tagline"><i class="fas fa-microchip"></i> Software Engineering · Full-Stack & AI Engineer</div>
+            <div class="contact-bar">
+                <span><i class="fas fa-map-marker-alt"></i> Namakkal, India</span>
+                <a href="tel:+919342616929"><i class="fas fa-phone-alt"></i> +91-9342616929</a>
+                <a href="mailto:pranavoannadurai@gmail.com"><i class="fas fa-envelope"></i> pranavoannadurai@gmail.com</a>
+                <a href="#" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                <a href="#" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Profile Summary -->
+            <div data-aos="fade-up" data-aos-delay="50">
+                <div class="section-title"><i class="fas fa-user-astronaut"></i> Profile Summary</div>
+                <div class="profile-text">
+                    Software Engineering student with strong foundations in full-stack development and machine learning. Experienced in
+                    building scalable Spring Boot–React applications and developing deep learning models for computer vision tasks. Proficient in designing REST APIs, secure authentication systems, and optimized database-driven architectures. Delivered production-ready full-stack and machine learning solutions with measurable performance improvements.
+                </div>
+            </div>
+
+            <!-- Technical Skills (interactive chips) -->
+            <div data-aos="fade-up" data-aos-delay="100">
+                <div class="section-title"><i class="fas fa-cogs"></i> Technical Arsenal</div>
+                <div class="skills-cloud">
+                    <span class="skill-chip"><strong>Languages:</strong> Java, C, C++, Python, JS</span>
+                    <span class="skill-chip"><strong>Web:</strong> Spring Boot, React, Node.js, REST, JWT</span>
+                    <span class="skill-chip"><strong>DB:</strong> MySQL, Oracle, Firebase</span>
+                    <span class="skill-chip"><strong>DevOps:</strong> Docker, AWS (EC2/S3), Render, Vercel</span>
+                    <span class="skill-chip"><strong>ML/DL:</strong> PyTorch, TensorFlow, CNN, YOLO, OpenCV</span>
+                    <span class="skill-chip"><strong>Tools:</strong> Postman, Linux, Git, JUnit, Colab</span>
+                    <span class="skill-chip"><strong>Core:</strong> DSA, OOP, OS, Networks, SDLC, Agile</span>
+                </div>
+            </div>
+
+            <!-- Projects section -->
+            <div data-aos="fade-up" data-aos-delay="150">
+                <div class="section-title"><i class="fas fa-laptop-code"></i> Featured Projects</div>
+
+                <!-- GoLance -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-name">🚀 GoLance – Campus Freelancing Hub</span>
+                        <div class="project-links">
+                            <a href="#" target="_blank"><i class="fab fa-github"></i> Backend</a>
+                            <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Demo</a>
+                        </div>
+                    </div>
+                    <div class="project-tech">Spring Boot · React · MySQL · JWT · Docker · Render · Vercel</div>
+                    <ul class="project-list">
+                        <li><i class="fas fa-chevron-right"></i> Full-stack platform for 50+ students: task posting, bidding, wallet & real-time chat.</li>
+                        <li><i class="fas fa-chevron-right"></i> 12+ REST APIs with role-based access and JWT authentication, credit pipelines.</li>
+                        <li><i class="fas fa-chevron-right"></i> Containerized via Docker, deployed backend on Render, frontend on Vercel, MySQL on Railway.</li>
+                        <li><i class="fas fa-chevron-right"></i> Engineered high-concurrency bid/rating system ensuring transactional consistency.</li>
+                    </ul>
+                </div>
+
+                <!-- Tamil Handwriting -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-name">📜 Tamil Handwriting Recognition</span>
+                        <div class="project-links"><a href="#" target="_blank"><i class="fab fa-github"></i> Code</a></div>
+                    </div>
+                    <div class="project-tech">PyTorch · OpenCV · CNN · Deep Learning · Image Processing</div>
+                    <ul class="project-list">
+                        <li><i class="fas fa-chevron-right"></i> CNN-based system on TamilNet (156 classes, 26k samples) – <strong>89.48% accuracy</strong>.</li>
+                        <li><i class="fas fa-chevron-right"></i> Custom preprocessing: histogram equalization, Otsu thresholding, skeletonization.</li>
+                        <li><i class="fas fa-chevron-right"></i> 6-layer CNN with BatchNorm & L2 regularization → training loss ↓0.26.</li>
+                        <li><i class="fas fa-chevron-right"></i> Real-time character segmentation via OpenCV contour detection for multi-character lines.</li>
+                    </ul>
+                </div>
+
+                <!-- Fragment Encrypt -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-name">🔐 Fragment Encrypt-Store (AES-ECC)</span>
+                        <div class="project-links"><a href="#" target="_blank"><i class="fab fa-github"></i> GitHub</a></div>
+                    </div>
+                    <div class="project-tech">Python · AES · ECC · Cryptography · Flask · Dropbox API</div>
+                    <ul class="project-list">
+                        <li><i class="fas fa-chevron-right"></i> Hybrid AES-ECC secure cloud storage with file fragmentation (up to 500MB).</li>
+                        <li><i class="fas fa-chevron-right"></i> Any missing fragment blocks recovery – enhanced security model.</li>
+                        <li><i class="fas fa-chevron-right"></i> Achieved 1.07 MB/s download speed & 0.3% crypto overhead; network-bound.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Education -->
+            <div data-aos="fade-up" data-aos-delay="200">
+                <div class="section-title"><i class="fas fa-graduation-cap"></i> Education</div>
+                <div class="edu-grid">
+                    <div class="edu-card">
+                        <i class="fas fa-university" style="color: #1d7e9c;"></i>
+                        <div><strong>Vellore Institute of Technology, Vellore</strong> <span style="float: right;">2022 - Present</span></div>
+                        <div style="font-size: 0.85rem;">M.Tech (Integrated) Software Engineering</div>
+                        <div style="font-weight: 600; color:#135e7a;">CGPA: 8.57 / 10</div>
+                    </div>
+                    <div class="edu-card">
+                        <i class="fas fa-school"></i>
+                        <div><strong>Royal International School, Namakkal</strong> <span style="float: right;">2020 - 2022</span></div>
+                        <div style="font-size: 0.85rem;">Higher Secondary (HSC)</div>
+                        <div style="font-weight: 600; color:#135e7a;">Grade: 92%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certifications & Achievements interactive -->
+            <div data-aos="fade-up" data-aos-delay="250">
+                <div class="section-title"><i class="fas fa-award"></i> Certifications & Achievements</div>
+                <div class="cert-item">
+                    <span class="cert-title"><i class="fab fa-aws"></i> AWS Certified Cloud Practitioner (CLF-C02) – Amazon Web Services</span>
+                    <span class="cert-date">Feb 2026</span>
+                </div>
+                <div class="cert-item">
+                    <span class="cert-title"><i class="fas fa-satellite-dish"></i> AI/ML for Geodata Analysis – ISRO</span>
+                    <span class="cert-date">Aug 2024</span>
+                </div>
+                <div class="cert-item">
+                    <span class="cert-title"><i class="fas fa-medal"></i> Top 10 overall (50+ teams) & Top 2 domain winner – Makeathon 2025 (VIT-TBI)</span>
+                    <span class="cert-date">Oct 2025</span>
+                </div>
+            </div>
+
+            <!-- Extra micro interaction: showcase -->
+            <hr style="margin: 1.4rem 0 0.6rem 0; border-color:#bee0f0;">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; align-items: center;">
+                <div><i class="fas fa-heart" style="color:#ff8c8c;"></i> <span style="font-size:0.75rem;">⚡ production-ready mindset | secure systems</span></div>
+                <div><i class="fas fa-chart-line"></i> <span style="font-size:0.75rem;">89% accuracy · 1.07 MB/s encryption</span></div>
+                <div class="glow-text"><i class="fab fa-docker"></i> <span style="font-weight:500;">CI/CD · Cloud fundamentals</span></div>
+            </div>
+            <footer>
+                <i class="far fa-copyright"></i> Pranavo V A — Full-stack & AI portfolio | Let's connect and build impactful tech
+            </footer>
+        </div>
+    </div>
+</div>
+<!-- back to top button -->
+<div class="scroll-top" id="backToTopBtn">
+    <i class="fas fa-arrow-up"></i>
+</div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ once: true, offset: 30, duration: 700 });
+    
+    // interactive back to top button
+    const backBtn = document.getElementById('backToTopBtn');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+            backBtn.classList.add('show');
+        } else {
+            backBtn.classList.remove('show');
+        }
+    });
+    backBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // small easter egg: console greet
+    console.log("%c✨ Pranavo's portfolio loaded — interactive & full-stack ready ✨", "color: #1f6d93; font-size: 14px;");
+    // hover fancy effect on skill chips already via css; extra dynamic on project cards
+    const cards = document.querySelectorAll('.project-card');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', (e) => {
+            card.style.transition = 'transform 0.25s ease, box-shadow 0.3s';
+        });
+    });
+</script>
+</body>
+</html>
